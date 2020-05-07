@@ -1,9 +1,15 @@
 import numpy as np
+import cv2
 import matplotlib.pyplot as plt
 from io import BytesIO
 from PIL import Image
-from scipy.ndimage import gaussian_filter as gaussian
-from skimage.filters import gaussian
+
+
+def _get_img(img):
+    with open("data/{}".format(img), "rb") as image:
+        f = image.read()
+        b = bytearray(f)
+    return b
 
 
 def imshow(arr):
@@ -16,32 +22,43 @@ def _open_as_bytestream(img):
     return Image.open(BytesIO(img))
 
 
-def _to_grayscale(arr):
-    img_bytes = _open_as_bytestream(arr)
-    img_bytes = img_bytes.convert('L')
-    return img_bytes
-
-
-def _to_np_array(byte_stream):
+def _to_2d_array(byte_stream):
     arr = np.array(byte_stream)
-    return arr.astype(np.int16)
+    indices = np.dstack(np.indices(arr.shape[:2]))
+    return np.concatenate((arr, indices), axis=-1)
 
 
 def _resize_img(arr):
-    if arr.shape[0] < 400 or arr.shape[1] < 400:
-        raise ValueError("Image must be at least 400x400 pixels.")
     width = 400
     height = 400
-    x_start_point = (arr.shape[0] / 2) - (width / 2)
-    y_start_point = (arr.shape[0] / 2) - (width / 2)
-    return arr[x_start_point:, y_start_point:]
+    return cv2.resize(arr, dsize=(width,height), interpolation=cv2.INTER_CUBIC)
 
 
-def _prepare_image(img):
+def _salt_and_pepper(img):
+    s_vs_p = 0.5
+    amount = 0.05
+    out = np.copy(img)
+
+    # Salt mode
+    num_salt = np.ceil(amount * img.size * s_vs_p)
+    coords = [np.random.randint(0, i-1, int(num_salt))
+              for i in img.shape]
+    out[coords] = 1
+
+    # Pepper mode
+    num_pepper = np.ceil(amount * img.size * (1. - s_vs_p))
+    coords = [np.random.randint(0, i - 1, int(num_pepper))
+              for i in img.shape]
+    out[coords] = 0
+    return out
+
+
+def prepare_image(img_path)::imshow()
     """Convert an image byte stream to grayscale into an array and applies a Gaussian blur to reduce noise """
-    arr = _to_grayscale(img)
-    arr = _to_np_array(arr)
-    arr = _resize_img(arr)
-    arr = gaussian(arr, sigma=3, preserve_range=True)
-    arr = _to_np_array(arr)
-    return arr
+    img = cv2.imread("data/nebula.jpg")
+    img = _resize_img(img)
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    img = _salt_and_pepper(img)
+    imshow(img)
+#    arr = gaussian(arr, sigma=3, preserve_range=True)
+    return img
