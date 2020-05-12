@@ -49,7 +49,7 @@ source bin/activate
 ```
 3. Installer les package nécessaires
 ```sh
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 4. Naviguer vers le dossier racine du projet
 ```sh
