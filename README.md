@@ -1,4 +1,4 @@
-<!-- TABLE OF CONTENTS -->
+﻿<!-- TABLE OF CONTENTS -->
 ## Table des matières
 
 * [À propos du projet](#à-propos-du-projet)
@@ -60,3 +60,18 @@ cd path/to/project/Projet-de-conception-TNS/
 jupyter lab
 ```
 6. Vous pouvez exécuter chaque cellule vous positionnant dessus et en utilisant Shift+Enter ou exécuter toutes les cellules avec l'onglet Run->Run All Cells
+
+
+### traitement du son Audio sur Matlab
+
+le projet a été fait par crée sous forme de matlab live script avec Matlab 2018a.  
+
+Pour lancer le projet 
+
+
+Dans chaque fichier respectif des sons audio, il y a un fichier '.mlx '.
+
+Ouvrir le fichier .mlx avec Matlab ce qui va ouvrir un live script.
+
+les signaux filtrés sont tous enregistré dans un sous fichier nommé Block. 
+
