@@ -2,10 +2,11 @@
 ## Table des matières
 
 * [À propos du projet](#à-propos-du-projet)
-  * [](#built-with)
+  * [Built With](#built-with)
 * [Débuter](#débuter)
   * [Prérequis](#prérequis)
   * [Installation](#installation)
+  * [Traitement audio sur Matlab](#traitement-audio-sur-matlab)
 
 
 
@@ -31,7 +32,7 @@ Pour l'exécution des étapes suivantes, nous vous recommandons l'utilisation d'
 
 Le fonctionnement du projet requiert certains préalables. Assurez-vous d'avoir installé les versions requises des éléments suivants:
 * Python 3
-* Matlab 2017 ou +
+* Matlab 2018 ou +
 * Jupyer lab
 ```sh
 pip install jupyter lab
@@ -62,16 +63,12 @@ jupyter lab
 6. Vous pouvez exécuter chaque cellule vous positionnant dessus et en utilisant Shift+Enter ou exécuter toutes les cellules avec l'onglet Run->Run All Cells
 
 
-### traitement du son Audio sur Matlab
+### Traitement audio sur Matlab
 
-le projet a été fait par crée sous forme de matlab live script avec Matlab 2018a.  
+Le projet a été fait en créant des matlab live scripts avec Matlab 2018a. 
 
-Pour lancer le projet 
-
-
-Dans chaque fichier respectif des sons audio, il y a un fichier '.mlx '.
-
-Ouvrir le fichier .mlx avec Matlab ce qui va ouvrir un live script.
-
-les signaux filtrés sont tous enregistré dans un sous fichier nommé Block. 
+Pour lancer le projet:
+* Dans chaque dossier pour les sons, il y a un fichier '.mlx '.
+* Ouvrir le fichier .mlx avec Matlab, ce qui va ouvrir un live script. Les signaux filtrés sont tous enregistré dans un sous dossier nommé Block.
+* Il suffit d'exécuter chaque script pour produire les résultats présentés dans le rapport
 
